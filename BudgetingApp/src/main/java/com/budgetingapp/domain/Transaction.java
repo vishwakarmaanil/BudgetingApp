@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.junit.experimental.categories.Categories;
 
 @Entity
 public class Transaction
@@ -16,6 +19,8 @@ public class Transaction
 	private BigDecimal total;
 	private String type;
 	private String note;
+
+	private Category category;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,6 +72,17 @@ public class Transaction
 	public void setNote(String note)
 	{
 		this.note = note;
+	}
+
+	@ManyToOne
+	public Category getCategory()
+	{
+		return category;
+	}
+
+	public void setCategory(Category category)
+	{
+		this.category = category;
 	}
 
 }
