@@ -1,5 +1,6 @@
 package com.budgetingapp.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -9,19 +10,18 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "groupss")
-public class Group
+public class Budget
 {
 	private Long id;
 	private String name;
-	private Set<Category> categories = new TreeSet<>();
-
-	private Budget budget;
+	private Set<User> users = new HashSet<>();
+	private Set<Group> group = new TreeSet<>();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,26 +45,27 @@ public class Group
 		this.name = name;
 	}
 
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "group")
-	public Set<Category> getCategories()
+	@ManyToMany
+	@JoinTable(inverseJoinColumns = @JoinColumn(name = "user_id"), joinColumns = @JoinColumn(name = "budget_id"))
+	public Set<User> getUser()
 	{
-		return categories;
+		return users;
 	}
 
-	public void setCategories(Set<Category> categories)
+	public void setUser(Set<User> users)
 	{
-		this.categories = categories;
+		this.users = users;
 	}
 
-	@ManyToOne
-	public Budget getBudget()
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "budget")
+	public Set<Group> getGroup()
 	{
-		return budget;
+		return group;
 	}
 
-	public void setBudget(Budget budget)
+	public void setGroup(Set<Group> group)
 	{
-		this.budget = budget;
+		this.group = group;
 	}
 
 }
