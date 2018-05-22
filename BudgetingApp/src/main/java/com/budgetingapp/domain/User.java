@@ -1,5 +1,6 @@
-package com.budgetingapp.domain;
+ package com.budgetingapp.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -10,7 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
@@ -19,8 +23,9 @@ public class User
 	private Long id;
 	private String username;
 	private String password;
-
 	private Set<Budget> budgets = new TreeSet<>();
+
+	private Set<Authority> authorities = new HashSet<>();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,14 +60,25 @@ public class User
 	}
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<Budget> getGroups()
+	public Set<Budget> getBudgets()
 	{
 		return budgets;
 	}
 
-	public void setGroups(Set<Budget> groups)
+	public void setBudgets(Set<Budget> budgets)
 	{
 		this.budgets = budgets;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	public Set<Authority> getAuthorities()
+	{
+		return authorities;
+	}
+
+	public void setAuthorities(Set<Authority> authorities)
+	{
+		this.authorities = authorities;
 	}
 
 }
