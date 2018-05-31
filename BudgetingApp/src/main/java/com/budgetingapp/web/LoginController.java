@@ -2,6 +2,7 @@ package com.budgetingapp.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,5 +28,11 @@ public class LoginController
 		model.put("user", user);
 
 		return "register";
+	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String postRegister(@ModelAttribute User user, ModelMap model)
+	{
+		return "redirect:/budgets";
 	}
 }

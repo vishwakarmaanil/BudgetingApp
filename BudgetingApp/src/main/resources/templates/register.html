@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
 <title>Please Register</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-	crossorigin="anonymous"/>
+	crossorigin="anonymous" />
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
 	integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
@@ -20,13 +20,28 @@
 </head>
 <body>
 	<div class="card">
-		<div class="card-header">Featured</div>
-		<div class="card-body">
-			<h5 class="card-title">Special title treatment</h5>
-			<p class="card-text">With supporting text below as a natural
-				lead-in to additional content.</p>
-			<a href="#" class="btn btn-primary">Go somewhere</a>
-		</div>
+		<h2 class="card-header">Please Register Below</h2>
+		<form action="" method="post">
+			<div class="form-group">
+				<label for="exampleInputEmail1">Email address</label> <input
+					type="email" class="form-control" th:field="${user.username}"
+					aria-describedby="emailHelp" placeholder="Enter email"> <small
+					id="emailHelp" class="form-text text-muted">We'll never
+					share your email with anyone else.</small>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputPassword1">Password</label> <input
+					type="password" class="form-control" th:field="${user.username}"
+					placeholder="Password">
+			</div>
+			<div class="form-group">
+				<label for="exampleInputPassword1">Confirm Password</label> <input
+					type="password" class="form-control" th:field="${user.username}"
+					placeholder="Password">
+			</div>
+			<button type="submit" class="btn btn-primary">Register</button>
+		</form>
+	</div>
 	</div>
 </body>
 </html>
